@@ -1,5 +1,7 @@
 #include <cstdio>
 #include <vector>
+#include <cstdio>
+#include <vector>
 #include <algorithm>
 #include <sstream>
 #include <iostream>
@@ -33,20 +35,20 @@ int cal_min_coins_dp(const vector<int>& coin_list, const int& val) {
 }
 
 // Recursive Solution, calling same function over and over on subproblem
-// Complexity is exponetnial size as recrusion forms tree. In this problem,
+// Complexity is exponential size as recrusion forms tree. In this problem,
 // tree has number of children equal to coin list size. 
 int cal_min_coins_recurse(const vector<int>& coin_list, const int& val) {
     int min_coins = std::numeric_limits<int>::max();
     for(auto const& coin: coin_list) {
         int diff = val - coin ;
         if(diff < 0) {
-            return std::numeric_limits<int>::max();
+            return std::numeric_limits<int>::max()-1;
         }
         if(diff == 0){
             return 1;
         }
         if(diff > 0) {
-            min_coins = min( min_coins, 1 + cal_min_coins_recurse(coin_list, diff)) ;
+            min_coins =  min(min_coins, 1 + cal_min_coins_recurse(coin_list, diff)) ;
         }
     }
     return min_coins;
